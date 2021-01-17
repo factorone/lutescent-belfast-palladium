@@ -74,15 +74,6 @@ class AuthNavbar extends React.Component
                     <Collapse isOpen={this.state.collapseOpen} navbar>
                         <Nav navbar className="ml-auto">
                             <NavItem>
-                                <NavLink
-                                    to="/admin/dashboard"
-                                    className="nav-link text-primary"
-                                >
-                                    <i className="tim-icons icon-minimal-left" /> Back to
-                                    Dashboard
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
                                 <NavLink to="/auth/register" className="nav-link">
                                     <i className="tim-icons icon-laptop" /> Register
                                 </NavLink>
@@ -90,11 +81,6 @@ class AuthNavbar extends React.Component
                             <NavItem>
                                 <NavLink to="/auth/login" className="nav-link">
                                     <i className="tim-icons icon-single-02" /> Login
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink to="/auth/pricing" className="nav-link">
-                                    <i className="tim-icons icon-coins" /> Pricing
                                 </NavLink>
                             </NavItem>
                             <NavItem>

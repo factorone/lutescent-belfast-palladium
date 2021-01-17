@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footer/Footer.js";
-
 import routes from "routes.js";
 
 class Auth extends React.Component 
@@ -56,6 +55,7 @@ class Auth extends React.Component
                 }
             }
         }
+        
         return activeRoute;
     };
 
@@ -64,9 +64,6 @@ class Auth extends React.Component
         let pageName = this.getActiveRoute(routes);
         switch (pageName) 
         {
-            case "Pricing":
-                return "pricing-page";
-
             case "Login":
                 return "login-page";
 
