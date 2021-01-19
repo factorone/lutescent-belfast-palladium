@@ -53,8 +53,6 @@ class Sidebar extends React.Component
 
     createLinks = routes => 
     {
-        const { rtlActive } = this.props;
-
         return routes.map((prop, key) => 
         {
             if (prop.redirect) 
@@ -68,34 +66,23 @@ class Sidebar extends React.Component
                 st[prop["state"]] = !this.state[prop.state];
 
                 return (
-                    <li
-                        className={this.getCollapseInitialState(prop.views) ? "active" : ""}
-                        key={key}
-                    >
-                        <a
-                            href="#pablo"
-                            data-toggle="collapse"
-                            aria-expanded={this.state[prop.state]}
-                            onClick={e => {
-                                e.preventDefault();
-                                this.setState(st);
-                            }}
-                        >
+                    <li className={this.getCollapseInitialState(prop.views) ? "active" : ""} key={key}>
+                        <a href="#pablo" data-toggle="collapse" aria-expanded={this.state[prop.state]} onClick={e => { e.preventDefault(); this.setState(st); }}>
                             {prop.icon !== undefined ? (
                                 <>
                                     <i className={prop.icon} />
                                     <p>
-                                        {rtlActive ? prop.rtlName : prop.name}
+                                        {prop.name}
                                         <b className="caret" />
                                     </p>
                                 </>
                             ) : (
                                 <>
                                     <span className="sidebar-mini-icon">
-                                        {rtlActive ? prop.rtlMini : prop.mini}
+                                        {prop.mini}
                                     </span>
                                     <span className="sidebar-normal">
-                                        {rtlActive ? prop.rtlName : prop.name}
+                                        {prop.name}
                                         <b className="caret" />
                                     </span>
                                 </>
@@ -109,24 +96,20 @@ class Sidebar extends React.Component
             }
 
             return (
-                <li className={this.activeRoute(prop.layout + prop.path)} key={key}>
-                    <NavLink
-                        to={prop.layout + prop.path}
-                        activeClassName=""
-                        onClick={this.props.closeSidebar}
-                    >
+                <li className={this.activeRoute(prop.path)} key={key}>
+                    <NavLink to={prop.path} activeClassName="" onClick={this.props.closeSidebar}>
                         {prop.icon !== undefined ? (
                             <>
                                 <i className={prop.icon} />
-                                <p>{rtlActive ? prop.rtlName : prop.name}</p>
+                                <p>{prop.name}</p>
                             </>
                         ) : (
                             <>
                                 <span className="sidebar-mini-icon">
-                                    {rtlActive ? prop.rtlMini : prop.mini}
+                                    {prop.mini}
                                 </span>
                                 <span className="sidebar-normal">
-                                    {rtlActive ? prop.rtlName : prop.name}
+                                    {prop.name}
                                 </span>
                             </>
                         )}
@@ -168,16 +151,10 @@ class Sidebar extends React.Component
 
         if (logo !== undefined) 
         {
-            if (logo.outterLink !== undefined) 
+            if (logo.outerLink !== undefined) 
             {
                 logoImg = (
-                    <a
-                        href={logo.outterLink}
-                        className="simple-text logo-mini"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={this.props.closeSidebar}
-                    >
+                    <a href={logo.outerLink} className="simple-text logo-mini" target="_blank" rel="noopener noreferrer" onClick={this.props.closeSidebar}>
                         <div className="logo-img">
                             <img src={logo.imgSrc} alt="react-logo" />
                         </div>
@@ -185,13 +162,7 @@ class Sidebar extends React.Component
                 );
 
                 logoText = (
-                    <a
-                        href={logo.outterLink}
-                        className="simple-text logo-normal"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={this.props.closeSidebar}
-                    >
+                    <a href={logo.outerLink} className="simple-text logo-normal" target="_blank" rel="noopener noreferrer" onClick={this.props.closeSidebar}>
                         {logo.text}
                     </a>
                 );
@@ -199,11 +170,7 @@ class Sidebar extends React.Component
             else 
             {
                 logoImg = (
-                    <NavLink
-                        to={logo.innerLink}
-                        className="simple-text logo-mini"
-                        onClick={this.props.closeSidebar}
-                    >
+                    <NavLink to={logo.innerLink} className="simple-text logo-mini" onClick={this.props.closeSidebar}>
                         <div className="logo-img">
                             <img src={logo.imgSrc} alt="react-logo" />
                         </div>
@@ -211,11 +178,7 @@ class Sidebar extends React.Component
                 );
 
                 logoText = (
-                    <NavLink
-                        to={logo.innerLink}
-                        className="simple-text logo-normal"
-                        onClick={this.props.closeSidebar}
-                    >
+                    <NavLink to={logo.innerLink} className="simple-text logo-normal" onClick={this.props.closeSidebar}>
                         {logo.text}
                     </NavLink>
                 );
@@ -249,7 +212,7 @@ Sidebar.propTypes = {
             text: PropTypes.string.isRequired
         }),
         PropTypes.shape({
-            outterLink: PropTypes.string.isRequired,
+            outerLink: PropTypes.string.isRequired,
             imgSrc: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired
         })

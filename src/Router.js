@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from "react-router-dom";
-import Store from "services/Store";
+import { Store } from "services/Store";
 
-import Admin from "layouts/Admin/Admin.js";
-import AuthLayout from "layouts/Auth/Auth";
+import Dashboard from "layouts/Private/Dashboard";
+import Account from "layouts/Private/Account";
+import Integrations from "layouts/Private/Integrations";
+import Configuration from "layouts/Private/Configuration";
 
 class Router extends Component 
 {
@@ -14,19 +16,16 @@ class Router extends Component
 
     render() 
     {
-        if(!Store.isLoggedIn())
-        {
-            return (
-                //<LoginScreen />
-            );
-        }
-
         return (
             <Switch>
-                <Route path="/auth" render={props => <AuthLayout {...props} />} />
-                <Route path="/admin" render={props => <Admin {...props} />} />
-                <Route path="/login" render={props => <AuthLayout {...props} />} />
-                <Redirect from="/" to="/admin/dashboard" />
+                {/* Private routes */}
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/account" component={Account} />
+                <Route exact path="/integrations" component={Integrations} />
+                <Route exact path="/integrations/Add" component={Integrations} />
+                <Route exact path="/configuration" component={Configuration} />
+                
+                
             </Switch>
         );
     }

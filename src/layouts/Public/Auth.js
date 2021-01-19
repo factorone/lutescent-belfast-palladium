@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footer/Footer.js";
+import AuthNavbar from "components/Navbars/AuthNavbar";
+import Footer from "components/Footer/Footer";
 import routes from "routes.js";
 
 class Auth extends React.Component 

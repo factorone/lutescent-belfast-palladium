@@ -3,7 +3,11 @@
         "baseUrl": "src",
         "paths": {
             "*": ["src/*"]
-        }
-    }
+        },
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
   

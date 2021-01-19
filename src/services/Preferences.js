@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import Store from './Store';
-import Services from './Background';
+import { Store } from './Store';
 import { func } from 'prop-types';
 import fs from "fs";
 
@@ -53,7 +52,6 @@ const Preferences = {
 
         TEMP_STORAGE[name] = val; 
         Store.refresh(); 
-        Services.Polling.run(true);
         Store.Dispatcher.raise('update');
         
         return TEMP_STORAGE[name]; 
