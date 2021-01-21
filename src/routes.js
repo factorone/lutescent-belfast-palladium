@@ -5,6 +5,11 @@ const routes = [
         icon: "tim-icons icon-chart-pie-36"
     },
     {
+        path: "/reporting",
+        name: "Reports",
+        icon: "tim-icons icon-chart-bar-32"
+    },
+    {
         path: "/configuration",
         name: "Configuration",
         icon: "tim-icons icon-settings"
