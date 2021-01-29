@@ -16,7 +16,7 @@ import {
     Col
 } from "reactstrap";
 
-//import { Store } from "../../services/Store";
+import Store from "../../services/Store";
 
 class Login extends React.Component 
 {
@@ -105,7 +105,7 @@ class Login extends React.Component
                                     <CardHeader>
                                         <img
                                             alt="..."
-                                            src={require("assets/img/card-primary.png")}
+                                            src={require("../../assets/img/card-primary.png")}
                                         />
                                         <CardTitle tag="h1">Log in</CardTitle>
                                     </CardHeader>
@@ -146,37 +146,22 @@ class Login extends React.Component
                                         </InputGroup>
                                     </CardBody>
                                     <CardFooter>
-                                        <Button
-                                            block
-                                            className="mb-3"
-                                            color="primary"
-                                            href="#pablo"
-                                            onClick={e => e.preventDefault()}
-                                            size="lg"
-                                        >
+                                        <Button block className="mb-3" color="primary" onClick={e => this.login(e)} size="lg">
                                             Login
                                         </Button>
                                         <div className="pull-left">
-                                            <h6>
-                                                <a
-                                                    className="link footer-link"
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    Create Account
+                                            <h4>
+                                                <a className="link footer-link" href="/register">
+                                                    Register
                                                 </a>
-                                            </h6>
+                                            </h4>
                                         </div>
                                         <div className="pull-right">
-                                            <h6>
-                                                <a
-                                                    className="link footer-link"
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
-                                                >
+                                            <h4>
+                                                <a className="link footer-link" href="/support">
                                                     Need Help?
                                                 </a>
-                                            </h6>
+                                            </h4>
                                         </div>
                                     </CardFooter>
                                 </Card>

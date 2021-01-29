@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Store from "services/Store";
 import Router from "Router";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import PerfectScrollbar from "perfect-scrollbar";
+import AdminNavbar from "components/Navbars/AdminNavbar";
+import Footer from "components/Footer/Footer";
+import Sidebar from "components/Sidebar/Sidebar";
 import NotificationAlert from "react-notification-alert";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import FixedPlugin from "components/FixedPlugin/FixedPlugin";
 
-import routes from "routes.js";
+import Login from "./views/pages/Login";
+import Register from "./views/pages/Register";
+import routes from "routes";
 
 let ps;
 
@@ -28,23 +30,6 @@ class App extends Component
 
     componentDidMount() 
     {
-        if (navigator.platform.indexOf("Win") > -1) 
-        {
-            document.documentElement.classList.add("perfect-scrollbar-on");
-            document.documentElement.classList.remove("perfect-scrollbar-off");
-            ps = new PerfectScrollbar(this.refs.mainPanel);
-            this.refs.mainPanel.addEventListener(
-                "ps-scroll-y",
-                this.showNavbarButton
-            );
-
-            let tables = document.querySelectorAll(".table-responsive");
-            for (let i = 0; i < tables.length; i++) 
-            {
-                ps = new PerfectScrollbar(tables[i]);
-            }
-        }
-
         window.addEventListener("scroll", this.showNavbarButton);
     }
 
@@ -102,6 +87,25 @@ class App extends Component
         ) 
         {
             this.setState({ opacity: 0 });
+        }
+    };
+
+    getFullPageName = routes => 
+    {
+        let pageName = this.getActiveRoute(routes);
+        switch (pageName) 
+        {
+            case "Login":
+                return "login-page";
+
+            case "Register":
+                return "register-page";
+
+            case "Lock Screen":
+                return "lock-page";
+
+            default:
+                return "Default Brand Text";
         }
     };
 
@@ -168,6 +172,22 @@ class App extends Component
 
     render()
     {
+        if(!Store.isLoggedIn())
+        {
+            return (
+                <div className="wrapper wrapper-full-page" ref="fullPages">
+                    <div className={"full-page " + this.getFullPageName(routes)}>
+                        <Switch>
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/register" component={Register} />
+                            <Redirect from="/" to="/login" />
+                        </Switch>
+                        <Footer fluid />
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="wrapper">
                 <div className="rna-container">

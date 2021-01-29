@@ -120,7 +120,7 @@ class AdminNavbar extends React.Component
                         </button>
                         
                         <Collapse navbar isOpen={this.state.collapseOpen}>
-                            <Nav className="ml-auto" navbar>
+                            <Nav activeKey={window.location.pathname} className="ml-auto" navbar>
                                 <InputGroup className="search-bar" tag="li">
                                     <Button color="link" data-target="#searchModal" data-toggle="modal" id="search-button" onClick={this.toggleModalSearch}>
                                         <i className="tim-icons icon-zoom-split" />

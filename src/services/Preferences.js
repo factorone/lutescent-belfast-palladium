@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Store } from './Store';
+import Store from './Store';
 import { func } from 'prop-types';
 import fs from "fs";
 

@@ -6,6 +6,7 @@ import Dashboard from "layouts/Private/Dashboard";
 import Account from "layouts/Private/Account";
 import Integrations from "layouts/Private/Integrations";
 import Configuration from "layouts/Private/Configuration";
+import Reporting from "layouts/Private/Reporting";
 
 class Router extends Component 
 {
@@ -24,6 +25,7 @@ class Router extends Component
                 <Route exact path="/integrations" component={Integrations} />
                 <Route exact path="/integrations/Add" component={Integrations} />
                 <Route exact path="/configuration" component={Configuration} />
+                <Route exact path="/reporting" component={Reporting} />
                 
                 
             </Switch>

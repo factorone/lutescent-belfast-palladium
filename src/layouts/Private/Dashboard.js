@@ -19,7 +19,7 @@ class Dashboard extends React.Component
                 <div className={classNames("content", classes)}>
                     <Row>
                         <Col xs="12">
-                            <h1>Content View</h1>
+                            <h1>Dashboard View</h1>
                         </Col>
                     </Row>
                 </div>

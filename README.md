@@ -1,2 +1,2 @@
 # lutescent-belfast-palladium
-Just a sandox repo for the new Meastro crew concept.
+Just a sandox repo for the new Maestro crew concept.

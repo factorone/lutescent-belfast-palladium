@@ -1,48 +1,62 @@
 import Freezer from 'freezer-js';
 import _ from 'lodash';
 import log from 'loglevel';
-
+import ExpressionHelper from "../utils/ExpressionHelper";
 import Preferences from "./Preferences";
 
 const freezer = new Freezer({});
+const IS_CLIENT = typeof window !== 'undefined';
 
-export class Store 
-{
-    Dispatcher = {
+const Store = {
+    Dispatcher: {
         raise: freezer.emit,
         once: freezer.once,
         register: freezer.on,
         remove: freezer.off,    
-    };
-    
-    Log = log;
-    
-    Preferences = Preferences;
-    
-    Filters = {
+    },
+    Log: log,
+    Preferences: Preferences,
+    Filters: {
 
-    };
-
-    Refresh() 
+    },
+    eval: ExpressionHelper.eval,
+    exists: ExpressionHelper.exists,
+    Error: (message, data, options, code) =>
+    {
+        if(IS_CLIENT)
+        {
+            if(_.isNil(window.errors))
+            {
+                window.errors = [];
+            }
+            console.error(message, data);
+    
+            window.errors.push({
+                message: message,
+                code: code ? code : 500,
+                data: data ? data : { },
+                params: options ? options : { },
+                when: new Date()
+            });
+        }
+    },
+    Refresh: () =>
     { 
         freezer.emit('update'); 
     }
-}
+};
 
-export class State extends Store 
-{
-    thaw()
-    { 
+Store.State = {
+    thaw: () =>
+    {
         freezer.get().reset({}); 
-    }
-
-    get()
-    { 
+    },
+    get: () =>
+    {
         return freezer.get;
-    }
-
-    set(name, value) 
-    {  
+    },
+    set: (name, value) =>
+    {
         if(name.includes('.'))
         {
             const strArr = name.split('.');
@@ -56,9 +70,8 @@ export class State extends Store
             let state = freezer.get();
             state.set(name, value);
         }
-    }
-
-    ensure(name) 
+    },
+    ensure: (name) =>
     { 
         let state = freezer.get();
         if(_.isNil(state[name]))
@@ -68,44 +81,37 @@ export class State extends Store
         }    
 
         return state[name];
-    }
-
-    remove(name) 
+    },
+    remove: (name) =>
     { 
         freezer.get().remove(name); 
-    }
-
-    reset(name) 
+    },
+    reset: (name) =>
     { 
         freezer.get().set(name, {}); 
-    }
-
-    eval(path, defaultValue, debug) 
+    },
+    eval: (path, defaultValue, debug) =>
     {
         let model = freezer.get();
         return Store.eval(model, path, defaultValue, debug);
-    }
-
-    areEqual(path, target, deep) 
+    },
+    areEqual: (path, target, deep) =>
     {
         let model = freezer.get();
         let obj = Store.eval(model, path, null, false);
         return Store.Data.compare(target, obj, deep);
-    }
-
-    exists(path, debug) 
+    },
+    exists: (path, debug) =>
     {
         let model = freezer.get();
         return Store.exists(model, path, debug);
-    }
-
-    isNil(path, debug) 
+    },
+    isNil: (path, debug) =>
     {
         let model = freezer.get();
         return !Store.exists(model, path, debug);
-    }
-
-    clear(string)
+    },
+    clear: (string) =>
     {
         if(this.exists(string))
         {
@@ -122,4 +128,22 @@ export class State extends Store
             log.error(msg + string);
         }
     }
+};
+Store.isLoggedIn = () =>
+{
+    //console.log("Store.isLoggedIn", Store.State.exists('security'));
+    return Store.State.exists('security');
 }
+
+//Store.Session.create();
+
+if(IS_CLIENT) 
+{ 
+    window.Store = Store; 
+    window.ForceRender = () =>
+    { 
+        freezer.emit('update'); 
+    }
+}
+
+export default Store;
