@@ -26,7 +26,7 @@ class Router extends Component
                 <Route exact path="/integrations/Add" component={Integrations} />
                 <Route exact path="/configuration" component={Configuration} />
                 <Route exact path="/reporting" component={Reporting} />
-                
+                <Redirect from="/" to="/dashboard" />
                 
             </Switch>
         );

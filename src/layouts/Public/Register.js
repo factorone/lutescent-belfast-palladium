@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import ReactWizard from "react-bootstrap-wizard";
 import {
     Button,
     Card,
@@ -19,6 +20,28 @@ import {
     Row,
     Col
 } from "reactstrap";
+
+import Step1 from "../../views/forms/WizardSteps/Step1.js";
+import Step2 from "../../views/forms/WizardSteps/Step2.js";
+import Step3 from "../../views/forms/WizardSteps/Step3.js";
+
+var steps = [
+    {
+        stepName: "About",
+        stepIcon: "tim-icons icon-single-02",
+        component: Step1
+    },
+    {
+        stepName: "Account",
+        stepIcon: "tim-icons icon-settings-gear-63",
+        component: Step2
+    },
+    {
+        stepName: "Address",
+        stepIcon: "tim-icons icon-delivery-fast",
+        component: Step3
+    }
+];
 
 class Register extends React.Component 
 {
@@ -40,44 +63,6 @@ class Register extends React.Component
                 <div className="content">
                     <Container>
                         <Row>
-                            <Col className="ml-auto" md="5">
-                                <div className="info-area info-horizontal mt-5">
-                                    <div className="icon icon-warning">
-                                        <i className="tim-icons icon-wifi" />
-                                    </div>
-                                    <div className="description">
-                                        <h3 className="info-title">Marketing</h3>
-                                        <p className="description">
-                                            We've created the marketing campaign of the website. It
-                                            was a very interesting collaboration.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="info-area info-horizontal">
-                                    <div className="icon icon-primary">
-                                        <i className="tim-icons icon-triangle-right-17" />
-                                    </div>
-                                    <div className="description">
-                                        <h3 className="info-title">Fully Coded in HTML5</h3>
-                                        <p className="description">
-                                            We've developed the website with HTML5 and CSS3. The
-                                            client has access to the code using GitHub.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="info-area info-horizontal">
-                                    <div className="icon icon-info">
-                                        <i className="tim-icons icon-trophy" />
-                                    </div>
-                                    <div className="description">
-                                        <h3 className="info-title">Built Audience</h3>
-                                        <p className="description">
-                                            There is also a Fully Customizable CMS Admin Dashboard for
-                                            this product.
-                                        </p>
-                                    </div>
-                                </div>
-                            </Col>
                             <Col className="mr-auto" md="7">
                                 <Card className="card-register card-white">
                                     <CardHeader>

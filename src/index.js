@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import App from './App';
 
 import "./assets/scss/black-dashboard-pro-react.scss";
-import "./assets/demo/demo.css";
+//import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 
 const hist = createBrowserHistory();

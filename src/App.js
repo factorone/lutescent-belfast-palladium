@@ -9,8 +9,9 @@ import Sidebar from "components/Sidebar/Sidebar";
 import NotificationAlert from "react-notification-alert";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin";
 
-import Login from "./views/pages/Login";
-import Register from "./views/pages/Register";
+import Login from "./layouts/Public/Login";
+import Register from "./layouts/Public/Register";
+import ForgotPassword from "./layouts/Public/ForgotPassword";
 import routes from "routes";
 
 let ps;
@@ -180,6 +181,7 @@ class App extends Component
                         <Switch>
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/register" component={Register} />
+                            <Route exact path="/Forgot-Password" component={ForgotPassword} />
                             <Redirect from="/" to="/login" />
                         </Switch>
                         <Footer fluid />

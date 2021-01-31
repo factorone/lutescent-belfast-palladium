@@ -153,15 +153,6 @@ Preferences.Security = {
     user: function(val) 
     { 
         return Preferences.string("security.user", val, ""); 
-    },
-    locations: function()
-    {
-        const locations = Store.State.eval('security.securityProfile.locations');
-        const output = [];
-        locations.map((item) => {
-            output.push({ value: item.id, name: item.name });
-        });
-        return output;
     }
 }
 
